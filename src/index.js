@@ -6,7 +6,7 @@ app.use(express.json()):
 const mongooose = require('mongooose');
 
 
-/*objeto que será enviado para bancoi de bd*/
+/*objeto que será enviado para banco de bd*/
 const Film = mongoose.model('Film', {
       title: String,
       description : String,
@@ -15,7 +15,8 @@ const Film = mongoose.model('Film', {
 });
 
 app.get('/', (req, res) => { /* definindo a rota raiz do servidor */
-    res.send('Hello World!'); /* enviando uma resposta para o cliente */
+ const films  = await Film.find()
+ res.send(films); /* enviando uma resposta para o cliente */
 });
 
 app.post("/", async(req,res ) => { 
@@ -25,6 +26,7 @@ app.post("/", async(req,res ) => {
    image_url: req.body.image_url,
    trailer_url : req.body.trailer_url
   })
+ 
  await  film.save();
  res.send(film)
 })
