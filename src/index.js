@@ -2,8 +2,9 @@
  const app = express (); /* criasnado uma instancia do express*/
  const port = 3000; /* definindo a porta do servidor */
 
+app.use(express.json()):
 const mongooose = require('mongooose');
-mongooose.connect('');
+
 
 /*objeto que será enviado para bancoi de bd*/
 const Film = mongoose.model('Film', {
@@ -24,11 +25,12 @@ app.post("/", async(req,res ) => {
    image_url: req.body.image_url,
    trailer_url : req.body.trailer_url
   })
-
  await  film.save();
  res.send(film)
 })
-app.listen (port,() =>{
+
+
+app.listen (port,() => {
+ mongooose.connect('');
  console.log("app running");
- 
  });
